@@ -29,3 +29,12 @@ services:
       - VIPS_MAX_WIDTH=5000
       - VIPS_MAX_HEIGHT=5000
       - HTTP_LOADER_BASE_URL=https://pb.tana.moe/api/files
+
+  umami:
+    container_name: tomoyo-umami
+    build: 
+      context: ./build/umami
+      args:
+        - DATABASE_URL=${UMAMI_DATABASE_URL}
+    restart: unless-stopped
+
