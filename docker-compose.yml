@@ -11,6 +11,7 @@ services:
       - ./templates:/etc/nginx/templates
     environment:
       - NGINX_IMAGE_DOMAIN=image.tana.moe
+      - NGINX_ANALYTICS_DOMAIN=analytics.tana.moe
     ports:
       - "80:80"
       - "443:443"
