@@ -23,12 +23,13 @@ services:
       - PORT=8000
       - IMAGOR_UNSAFE=1
       - IMAGOR_AUTO_WEBP=1
-      - IMAGOR_PROCESS_CONCURRENCY=4
-      - IMAGOR_PROCESS_QUEUE_SIZE=50
+      - IMAGOR_PROCESS_CONCURRENCY=2
+      - IMAGOR_PROCESS_QUEUE_SIZE=1000
       - VIPS_MAX_RESOLUTION=16800000
       - VIPS_MAX_WIDTH=5000
       - VIPS_MAX_HEIGHT=5000
       - HTTP_LOADER_BASE_URL=https://pb.tana.moe/api/files
+      - HTTP_LOADER_FORWARD_CLIENT_HEADERS=1
 
   umami:
     container_name: tomoyo-umami
