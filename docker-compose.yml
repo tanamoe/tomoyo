@@ -33,9 +33,9 @@ services:
 
   umami:
     container_name: tomoyo-umami
-    build: 
-      context: ./build/umami
-      args:
-        - DATABASE_URL=${UMAMI_DATABASE_URL}
+    image: docker.umami.dev/umami-software/umami:postgresql-v2.5.0
     restart: unless-stopped
+    environment:
+      - DATABASE_URL=${UMAMI_DATABASE_URL}
+      - DATABASE_TYPE=postgresql
 
