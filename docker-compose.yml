@@ -22,7 +22,6 @@ services:
     restart: unless-stopped
     environment:
       - PORT=8000
-      - IMAGOR_UNSAFE=1
       - IMAGOR_SECRET=${IMAGOR_SECRET}
       - IMAGOR_SIGNER_TYPE=sha256
       - IMAGOR_SIGNER_TRUNCATE=40
