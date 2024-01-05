@@ -18,7 +18,7 @@ services:
 
   imagor:
     container_name: tomoyo-imagor
-    image: shumc/imagor:1.4.7
+    image: shumc/imagor:1.4.8
     restart: unless-stopped
     env_file:
       - imagor.env
