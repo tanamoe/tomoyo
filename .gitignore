@@ -1,5 +1,5 @@
+# environment variables
 .env
-data/
-logs/
-ssl/
+imagor.env
+umami.env
 

@@ -1,28 +1,29 @@
 version: '3.9'
 
 services:
-  nginx:
-    container_name: tomoyo-nginx
-    image: nginx:1.24.0-alpine
+  caddy:
+    container_name: tomoyo-caddy
+    image: caddy:2.7.6-alpine
     restart: unless-stopped
-    volumes:
-      - ./ssl:/etc/ssl:ro
-      - ./logs:/var/log/nginx
-      - ./templates:/etc/nginx/templates
-    environment:
-      - NGINX_IMAGE_DOMAIN=image.tana.moe
-      - NGINX_ANALYTICS_DOMAIN=analytics.tana.moe
+    cap_add:
+      - NET_ADMIN
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
 
   imagor:
     container_name: tomoyo-imagor
     image: shumc/imagor:1.4.7
     restart: unless-stopped
+    env_file:
+      - imagor.env
     environment:
       - PORT=8000
-      - IMAGOR_SECRET=${IMAGOR_SECRET}
       - IMAGOR_SIGNER_TYPE=sha256
       - IMAGOR_SIGNER_TRUNCATE=40
       - IMAGOR_AUTO_WEBP=1
@@ -36,9 +37,15 @@ services:
 
   umami:
     container_name: tomoyo-umami
-    image: docker.umami.dev/umami-software/umami:postgresql-v2.5.0
+    image: umamisoftware/umami:postgresql-v2.9.0
     restart: unless-stopped
+    env_file:
+      - umami.env
     environment:
-      - DATABASE_URL=${UMAMI_DATABASE_URL}
       - DATABASE_TYPE=postgresql
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
 

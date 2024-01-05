@@ -1,0 +1,8 @@
+image.tana.moe {
+    reverse_proxy imagor:8000    
+}
+
+analytics.tana.moe {
+    reverse_proxy umami:3000
+}
+
